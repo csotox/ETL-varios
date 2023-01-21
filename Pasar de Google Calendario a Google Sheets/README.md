@@ -70,9 +70,12 @@ function exportCalendarToSheets() {
     const inicio = e.getStartTime();
     const fin = e.getEndTime();
     const titulo = e.getTitle();
-    const tiempo = (((fin-inicio) / 1000) / 60) / 60;
     const color = e.getColor();
     const nota = e.getDescription();
+
+    // Calculo el tiempo total de duración del evento, de esta manera no tengo que hacerlo
+    // mas adelante
+    const tiempo = (((fin-inicio) / 1000) / 60) / 60;
 
     // Ignoro los eventos que su color es granito.
     // pueden ser las siguientes razones:
@@ -101,7 +104,7 @@ function exportCalendarToSheets() {
     console.log("Evento", inicio, "-", titulo, "-", posSalto, posSaltoX, "-", clasifica);
 
     // Agrego una nueva línea en el libro de Sheets con la información del evento
-    hojaOrigen.appendRow([eventId, inicio, fin, titulo, color, clasifica, tiempo]);
+    hojaOrigen.appendRow([eventId, inicio, fin, titulo, color, tiempo, clasifica]);
   })
 
 }
